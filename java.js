@@ -15,12 +15,22 @@ document.addEventListener("DOMContentLoaded", function () {
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(data, "application/xml");
 
+            // Check for parser errors
+            const parseError = xmlDoc.querySelector('parsererror');
+            if (parseError) {
+                throw new Error('Error parsing XML: ' + parseError.textContent);
+            }
+
             // Extract items from the RSS feed
             const items = xmlDoc.querySelectorAll("item");
+            if (items.length === 0) {
+                newsContainer.textContent = 'No news items found.';
+                return;
+            }
 
             items.forEach(item => {
-                const title = item.querySelector("title").textContent;
-                const link = item.querySelector("link").textContent;
+                const title = item.querySelector("title")?.textContent || 'No title';
+                const link = item.querySelector("link")?.textContent || '#';
 
                 // Create a new div for each news item
                 const newsItem = document.createElement('div');
