@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const rssUrl = 'https://www.space.com/feeds/all';
+    const rssUrl = ' https://feeds.simplecast.com/54nAGcIl';
+   
+    //https://www.space.com/feeds/all
     const newsContainer = document.getElementById('news-container');
 
     // Fetch the RSS feed
